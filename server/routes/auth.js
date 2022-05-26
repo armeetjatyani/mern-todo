@@ -2,9 +2,11 @@ var express = require("express");
 var bcrypt = require("bcryptjs");
 var router = express.Router();
 var User = require("../models/User.model");
+var jwt = require("jsonwebtoken");
+const Task = require("../models/Tasks.model");
 
 /* POST auth. */
-router.post("/", async (req, res, next) => {
+router.post("/register", async (req, res, next) => {
 	if (!req.body) {
 		res.status(400).json({ error: "no body provided" });
 		return;
@@ -26,9 +28,19 @@ router.post("/", async (req, res, next) => {
 	}
 
 	const newUser = new User({ username: req.body.username, password: req.body.password });
+	const newTask = new Task({ username: req.body.username, tasks: [] });
 	newUser.save();
+	newTask.save();
 
-	res.json({ success: { accessToken: "", refreshToken: "" } });
+	res.json({
+		accessToken: jwt.sign(
+			{
+				username: req.body.username,
+			},
+			"asecret"
+		),
+		refreshToken: "",
+	});
 });
 
 router.post("/login", async (req, res, next) => {
@@ -52,7 +64,15 @@ router.post("/login", async (req, res, next) => {
 		const correctCredentials = bcrypt.compareSync(req.body.password, user.password);
 
 		if (correctCredentials) {
-			res.json({ success: "Logged in" });
+			res.json({
+				accessToken: jwt.sign(
+					{
+						username: req.body.username,
+					},
+					"asecret"
+				),
+				refreshToken: "",
+			});
 		} else {
 			res.status(401).json({ error: "Incorrect password" });
 		}
