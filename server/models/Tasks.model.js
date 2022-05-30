@@ -4,7 +4,7 @@ var Tasks = mongoose.Schema;
 
 var TasksSchema = new Tasks({
 	username: { type: String, required: true },
-	tasks: [{ id: Number, description: String, status: Boolean }],
+	tasks: [{ description: String, status: Boolean }],
 });
 
 var Task = mongoose.model("tasks", TasksSchema);

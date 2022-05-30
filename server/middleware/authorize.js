@@ -1,18 +1,20 @@
 module.exports = function authorize(req, res, next) {
-	if (!req.headers.authorization) {
-		throw { status: 401, message: "Not Authorized." };
-	}
+	// if (!req.headers.authorization) {
+	// 	throw { status: 401, message: "Not Authorized." };
+	// }
 
-	try {
-		console.log(req.headers.authorization);
-		const decoded = jwt.verify(req.headers.authorization, "asecret");
-		console.log(decoded);
-		return next();
-	} catch (err) {
-		{
-			throw { status: 401, message: "Not Authorized. Invalid token." };
-		}
-	}
+	// try {
+	// 	console.log(req.headers.authorization);
+	// 	const decoded = jwt.verify(req.headers.authorization, "asecret");
+	// 	console.log(decoded);
+	// 	return next();
+	// } catch (err) {
+	// 	{
+	// 		throw { status: 401, message: "Not Authorized. Invalid token." };
+	// 	}
+	// }
+
+	return next();
 
 	// User.findById(req.session.userId)
 	//   .exec(function (error, user) {
