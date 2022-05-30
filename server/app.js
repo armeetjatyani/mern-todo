@@ -12,7 +12,7 @@ var cors = require("cors");
 var mongoose = require("mongoose");
 const { authorize } = require("./middleware/authorize");
 
-mongoose.connect("mongodb+srv://api:gtLtizsEOSI4KATG@cluster0.9wxrh.mongodb.net/db");
+mongoose.connect(process.env.MONGO);
 
 mongoose.connection.on("open", () => {
 	console.log("[DB] connected to MongoDB with mongoose client");
@@ -20,8 +20,7 @@ mongoose.connection.on("open", () => {
 
 app.use(
 	cors({
-		// origin: "http://localhost:3000",
-		origin: "*",
+		origin: "https://merntodo.vercel.app/",
 	})
 );
 app.use(logger("dev"));
