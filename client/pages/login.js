@@ -23,7 +23,6 @@ export default function Login() {
 
 		const data = { username: username, password: password };
 
-		console.log(process.env.NEXT_PUBLIC_API);
 		const req = await fetch(`${process.env.NEXT_PUBLIC_API}/auth/login`, {
 			method: "POST",
 			headers: {

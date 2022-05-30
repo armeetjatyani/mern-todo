@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var dotenv = require("dotenv");
 
 var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
@@ -12,6 +13,8 @@ var cors = require("cors");
 var mongoose = require("mongoose");
 const { authorize } = require("./middleware/authorize");
 
+dotenv.config();
+
 mongoose.connect(process.env.MONGO);
 
 mongoose.connection.on("open", () => {
@@ -20,7 +23,7 @@ mongoose.connection.on("open", () => {
 
 app.use(
 	cors({
-		origin: "https://merntodo.vercel.app/",
+		origin: "https://merntodo.vercel.app",
 	})
 );
 app.use(logger("dev"));
