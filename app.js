@@ -23,7 +23,8 @@ mongoose.connection.on("open", () => {
 
 app.use(
 	cors({
-		origin: "https://merntodo.vercel.app",
+		origin: "*",
+		// origin: "https://merntodo.vercel.app",
 	})
 );
 app.use(logger("dev"));
