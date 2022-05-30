@@ -30,7 +30,7 @@ export default function Home() {
 
 	useEffect(() => {
 		getData();
-	}, [session, getData]);
+	}, [session]);
 
 	return (
 		<div>
